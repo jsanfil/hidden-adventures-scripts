@@ -1,0 +1,27 @@
+hiddenadventures.lucidios.com {
+    encode gzip
+
+    root * /var/www/hidden-adventures
+
+    handle /api/* {
+        reverse_proxy 127.0.0.1:3000
+    }
+
+    handle /public/* {
+        file_server
+    }
+
+    handle {
+        file_server
+    }
+}
+
+admin-adventures.lucidios.com {
+    encode gzip
+
+    basicauth {
+        joe REPLACE_WITH_REAL_HASH
+    }
+
+    reverse_proxy 127.0.0.1:3001
+}
